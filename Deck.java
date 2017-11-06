@@ -40,6 +40,8 @@ public class Deck {
 		}	
 	}
 	
+	public Card drawCard(){ return deck.remove(0);}
+	
 	public int getSize(){ return deck.size();}
 	
 	public boolean isEmpty(){ return deck.isEmpty();}
