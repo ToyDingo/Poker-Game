@@ -12,38 +12,41 @@ public class Rulebook {
 	
 	private int highestRank;
 	private boolean isStraight = true;
+	private int[] result = new int[2];
 	private HashMap<Character, Integer> rankHm = new HashMap<Character, Integer>();
 	private HashMap<Character, Integer> suitHm = new HashMap<Character, Integer>();
 	
-	public int determineHand(ArrayList<Card> hand){
+	public int[] determineHand(ArrayList<Card> hand){
 		
 		sortHand(hand);
 		
+		result[1] = highestRank;
+		
 		if(rankHm.size() == 2){
-			if(rankHm.containsValue(4)) return 8; //4 of a Kind
-			if(rankHm.containsValue(3)) return 7; //Full House
+			if(rankHm.containsValue(4)) result[0] = 8; //4 of a Kind
+			if(rankHm.containsValue(3)) result[0] = 7; //Full House
 		}
 		
 		if(rankHm.size() == 3){
-			if(rankHm.containsValue(3)) return 4; //3 of a Kind
-			if(rankHm.containsValue(2)) return 3; //2 Pair
+			if(rankHm.containsValue(3)) result[0] = 4; //3 of a Kind
+			if(rankHm.containsValue(2)) result[0] = 3; //2 Pair
 		}
 		
-		if(rankHm.size() == 4) return 2; //Pair
+		if(rankHm.size() == 4) result[0] = 2; //Pair
 		
 		if(rankHm.size() == 5){
 			if(isStraight){
-				if(suitHm.size() == 1) return 9; //Straight Flush
-				if(suitHm.size() == 1 && highestRank == 12) return 10; //Royal Flush
-				if(suitHm.size() > 1) return 5; //Straight
+				if(suitHm.size() == 1) result[0] = 9; //Straight Flush
+				if(suitHm.size() == 1 && highestRank == 12) result[0] = 10; //Royal Flush
+				if(suitHm.size() > 1) result[0] = 5; //Straight
 			}
 			if(!isStraight){
-				if(suitHm.size() == 1) return 6; //Flush
-				if(suitHm.size() > 1) return 1; //High Card
+				if(suitHm.size() == 1) result[0] = 6; //Flush
+				if(suitHm.size() > 1) result[0] = 1; //High Card
 			}
 		}
 		
-		return 0; //Error
+		return result;
 	}
 	
 	private void sortHand(ArrayList<Card> hand){
@@ -99,5 +102,22 @@ public class Rulebook {
 				i = 5;
 			}
 		}
+	}
+	
+	public String whatHandIsThis(int input){
+		switch(input){
+			case 1 : return "High Card!";
+			case 2 : return "Pair!";
+			case 3 : return "2 Pair!";
+			case 4 : return "3 of a Kind!";
+			case 5 : return "Straight!";
+			case 6 : return "Flush!";
+			case 7 : return "Full House!";
+			case 8 : return "4 of a Kind!";
+			case 9 : return "Straight Flush!";
+			case 10 : return "Royal Flush!";
+		}
+		
+		return null;
 	}
 }
