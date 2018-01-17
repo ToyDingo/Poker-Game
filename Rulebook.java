@@ -11,12 +11,19 @@ import java.util.HashMap;
 public class Rulebook {
 	
 	private int highestRank;
-	private boolean isStraight = true;
-	private int[] result = new int[2];
+	private boolean isStraight;
 	private HashMap<Character, Integer> rankHm = new HashMap<Character, Integer>();
 	private HashMap<Character, Integer> suitHm = new HashMap<Character, Integer>();
 	
+	public Rulebook(){}
+	
 	public int[] determineHand(ArrayList<Card> hand){
+		
+		int[] result = new int[2];
+		highestRank = 0;
+		isStraight = true;
+		rankHm.clear();
+		suitHm.clear();
 		
 		sortHand(hand);
 		
@@ -24,25 +31,25 @@ public class Rulebook {
 		
 		if(rankHm.size() == 2){
 			if(rankHm.containsValue(4)) result[0] = 8; //4 of a Kind
-			if(rankHm.containsValue(3)) result[0] = 7; //Full House
+			else if(rankHm.containsValue(3)) result[0] = 7; //Full House
 		}
 		
-		if(rankHm.size() == 3){
+		else if(rankHm.size() == 3){
 			if(rankHm.containsValue(3)) result[0] = 4; //3 of a Kind
-			if(rankHm.containsValue(2)) result[0] = 3; //2 Pair
+			else if(rankHm.containsValue(2)) result[0] = 3; //2 Pair
 		}
 		
-		if(rankHm.size() == 4) result[0] = 2; //Pair
+		else if(rankHm.size() == 4) result[0] = 2; //Pair
 		
-		if(rankHm.size() == 5){
+		else if(rankHm.size() == 5){
 			if(isStraight){
 				if(suitHm.size() == 1) result[0] = 9; //Straight Flush
-				if(suitHm.size() == 1 && highestRank == 12) result[0] = 10; //Royal Flush
-				if(suitHm.size() > 1) result[0] = 5; //Straight
+				else if(suitHm.size() == 1 && highestRank == 12) result[0] = 10; //Royal Flush
+				else if(suitHm.size() > 1) result[0] = 5; //Straight
 			}
-			if(!isStraight){
+			else if(!isStraight){
 				if(suitHm.size() == 1) result[0] = 6; //Flush
-				if(suitHm.size() > 1) result[0] = 1; //High Card
+				else if(suitHm.size() > 1) result[0] = 1; //High Card
 			}
 		}
 		
@@ -54,14 +61,14 @@ public class Rulebook {
 			if(rankHm.containsKey(hand.get(i).getRank())){
 				rankHm.put(hand.get(i).getRank(), rankHm.get(hand.get(i).getRank())+1);
 			}
-			else if(!rankHm.containsKey(hand.get(i).getRank())){
+			else{
 				rankHm.put(hand.get(i).getRank(), 1);
 			}
 			
 			if(suitHm.containsKey(hand.get(i).getSuit())){
 				suitHm.put(hand.get(i).getSuit(), suitHm.get(hand.get(i).getSuit())+1);
 			}
-			else if(!suitHm.containsKey(hand.get(i).getSuit())){
+			else{
 				suitHm.put(hand.get(i).getSuit(), 1);
 			}
 		}
@@ -77,18 +84,18 @@ public class Rulebook {
 		for(int i = 0; i < 5 ; i++){
 			
 			switch(hand.get(i).getRank()){
-				case '2' : handValues[i] = 0;
-				case '3' : handValues[i] = 1;
-				case '4' : handValues[i] = 2;
-				case '5' : handValues[i] = 3;
-				case '6' : handValues[i] = 4;
-				case '7' : handValues[i] = 5;
-				case '8' : handValues[i] = 6;
-				case '9' : handValues[i] = 7;
-				case 'T' : handValues[i] = 8;
-				case 'J' : handValues[i] = 9;
-				case 'Q' : handValues[i] = 10;
-				case 'K' : handValues[i] = 11;
+				case '2' : handValues[i] = 0; break;
+				case '3' : handValues[i] = 1; break;
+				case '4' : handValues[i] = 2; break;
+				case '5' : handValues[i] = 3; break;
+				case '6' : handValues[i] = 4; break;
+				case '7' : handValues[i] = 5; break;
+				case '8' : handValues[i] = 6; break;
+				case '9' : handValues[i] = 7; break;
+				case 'T' : handValues[i] = 8; break;
+				case 'J' : handValues[i] = 9; break;
+				case 'Q' : handValues[i] = 10; break;
+				case 'K' : handValues[i] = 11; break;
 				case 'A' : handValues[i] = 12;
 			}
 		}
