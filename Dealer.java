@@ -8,6 +8,8 @@ public class Dealer {
 	Deck deck = new Deck();
 	Rulebook rulebook = new Rulebook();
 	
+	public Dealer(){}
+	
 	public ArrayList<Card> dealCards(){
 		
 		ArrayList<Card> hand = new ArrayList<Card>();
@@ -35,17 +37,19 @@ public class Dealer {
 	public String determineWinner(ArrayList<Card> userHand, ArrayList<Card> aiHand){
 		
 		StringBuilder result = new StringBuilder("");
+		int[] user = rulebook.determineHand(userHand);
+		int[] ai = rulebook.determineHand(aiHand);
 		
-		if(rulebook.determineHand(userHand)[0] > rulebook.determineHand(aiHand)[0])
-			result.append("You win with " + rulebook.whatHandIsThis(rulebook.determineHand(userHand)[0]));
-		if(rulebook.determineHand(userHand)[0] < rulebook.determineHand(aiHand)[0])
-			result.append("Your opponent wins with " + rulebook.whatHandIsThis(rulebook.determineHand(aiHand)[0]));
-		if(rulebook.determineHand(userHand)[0] == rulebook.determineHand(aiHand)[0]){
-			if(rulebook.determineHand(userHand)[1] > rulebook.determineHand(aiHand)[1])
+		if(user[0] > ai[0])
+			result.append("You win with " + rulebook.whatHandIsThis(user[0]));
+		else if(user[0] < ai[0])
+			result.append("Your opponent wins with " + rulebook.whatHandIsThis(ai[0]));
+		else if(user[0] == ai[0]){
+			if(user[1] > ai[1])
 				result.append("You win with high card!");
-			if(rulebook.determineHand(userHand)[1] < rulebook.determineHand(aiHand)[1])
+			else if(user[1] < ai[1])
 				result.append("Your opponent wins with high card!");
-			if(rulebook.determineHand(userHand)[1] == rulebook.determineHand(aiHand)[1])
+			else if(user[1] == ai[1])
 				result.append("It's a tie!");
 		}		
 		
