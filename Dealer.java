@@ -21,10 +21,15 @@ public class Dealer {
 		return hand;
 	}
 	
-	public ArrayList<Card> replaceCards(ArrayList<Card> hand, ArrayList<Card> replace){
+	public ArrayList<Card> replaceCards(ArrayList<Card> hand, ArrayList<String> replace){
 		
-		for(Card i : replace){
-			hand.remove(i);
+		for(String i : replace){
+			for(Card j : hand){
+				if(j.toString().equals(i)){
+					hand.remove(j);
+					break;
+				}
+			}
 		}
 		
 		for(int i = 0; i < replace.size(); i++){
