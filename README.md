@@ -5,6 +5,10 @@ A simple game of 5 Card Poker.
 The game randomly assigns 5 cards to the user and 5 to itself, then 
 determines a winner based on the best combination of cards. 
 
+**Things to be added at a later date**
+-- Error handling
+-- Restart function
+
 Written entirely in Java 1.8
 
 Included classes:
