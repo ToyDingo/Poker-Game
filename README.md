@@ -1,10 +1,9 @@
 # Poker-Game
 
-A simple game of 5 Card Poker. This accepts no user input (so far). 
+A simple game of 5 Card Poker. 
 
 The game randomly assigns 5 cards to the user and 5 to itself, then 
-determines a winner based on the best combination of cards. Later versions
-may include user input to exchange cards. 
+determines a winner based on the best combination of cards. 
 
 Written entirely in Java 1.8
 
