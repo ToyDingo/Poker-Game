@@ -7,7 +7,6 @@ determines a winner based on the best combination of cards.
 
 **TODO**
 -- Error handling
--- Restart function
 
 Written entirely in Java 1.8
 
