@@ -103,7 +103,7 @@ public class Rulebook {
 		Arrays.sort(handValues);
 		highestRank = handValues[4];
 		
-		for(int i = 0; i < 5; i++){
+		for(int i = 0; i < 4; i++){
 			if((handValues[i] + 1) != handValues[i+1]){
 				isStraight = false;
 				i = 5;
