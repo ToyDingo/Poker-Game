@@ -12,6 +12,7 @@ public class FiveCardPoker {
 		
 		System.out.println("Welcome to 5 Card Poker!\n");
 		start();
+		input.close();
 	}
 	
 	private static void start(){
@@ -55,7 +56,6 @@ public class FiveCardPoker {
 			}
 		}
 		
-		input.close();
 		dealer.replaceCards(userHand, replaceThese);
 		
 		System.out.print("This is your new hand:\n");
@@ -80,6 +80,19 @@ public class FiveCardPoker {
 		}
 		System.out.println("\n");
 		
-		System.out.println(dealer.determineWinner(userHand, aiHand));
+		System.out.println(dealer.determineWinner(userHand, aiHand)+ "\n");
+		
+		if(dealer.deckSize() >= 12) restart();
+		else System.out.println("There are no longer enough cards in the deck to continue.\n Thanks for playing!");
+	}
+	
+	private static void restart(){
+		System.out.println("There are " + dealer.deckSize() + " cards remaining in the deck.");
+		System.out.print("Would you like to play another hand?\n (Y or N)");
+		String restart = input.next();
+		System.out.println();
+		
+		if(restart.equals("Y") || restart.equals("y")) start();
+		else System.out.println("Thanks for playing!\n");
 	}
 }
