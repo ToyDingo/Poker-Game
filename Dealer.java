@@ -64,5 +64,4 @@ public class Dealer {
 	public int deckSize(){
 		return deck.getSize();
 	}
-
 }
