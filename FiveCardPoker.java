@@ -3,19 +3,21 @@ import java.util.Scanner;
 
 public class FiveCardPoker {
 	
-	private static Dealer dealer = new Dealer();
-	private static ArrayList<Card> userHand = new ArrayList<Card>();
-	private static ArrayList<Card> aiHand = new ArrayList<Card>();
-	private static Scanner input = new Scanner(System.in);
+	private Dealer dealer = new Dealer();
+	private ArrayList<Card> userHand = new ArrayList<Card>();
+	private ArrayList<Card> aiHand = new ArrayList<Card>();
+	private Scanner input = new Scanner(System.in);
 
 	public static void main(String[] args) {
-		
+
+		FiveCardPoker game = new FiveCardPoker();
+
 		System.out.println("Welcome to 5 Card Poker!\n");
-		start();
-		input.close();
+		game.start();
+		game.input.close();
 	}
 	
-	private static void start(){
+	private void start(){
 		userHand.clear();
 		aiHand.clear();
 		userHand.addAll(dealer.dealCards());
@@ -35,7 +37,7 @@ public class FiveCardPoker {
 		else replace(numberToReplace);		
 	}
 	
-	private static void replace(int n){
+	private void replace(int n){
 		ArrayList<String> replaceThese = new ArrayList<String>();
 		String thisCard = new String();
 		
@@ -67,7 +69,7 @@ public class FiveCardPoker {
 		results();		
 	}
 	
-	private static void results(){
+	private void results(){
 		System.out.println("Your hand was: ");
 		for(Card i:userHand){
 			System.out.print(i.toString()+" ");
@@ -86,7 +88,7 @@ public class FiveCardPoker {
 		else System.out.println("There are no longer enough cards in the deck to continue.\n Thanks for playing!");
 	}
 	
-	private static void restart(){
+	private void restart(){
 		System.out.println("There are " + dealer.deckSize() + " cards remaining in the deck.");
 		System.out.print("Would you like to play another hand?\n (Y or N)");
 		String restart = input.next();
